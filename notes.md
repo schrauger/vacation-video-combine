@@ -17,3 +17,7 @@ It lists the video 'packets', and that gets counted by `wc` to give us the frame
 
 `ffprobe -show_packets 00100.MTS 2>/dev/null | grep video | wc -l`
 
+For avi and other videos, use the nb_frames parameter to get frames. I don't keep videos in this format, so I won't devote much time to making the script work with other formats.
+
+`ffprobe -select_streams v -show_streams 00099.MTS 2>/dev/null | grep nb_frames`
+
