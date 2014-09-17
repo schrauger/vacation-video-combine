@@ -7,3 +7,12 @@ file '00099.MTS'
 file '00100.MTS'
 file '00101.MTS'
 ```
+
+## Chapter marker stuff
+This works on mp4 files to get the total number of frames.
+Use this later in the script when creating the chapter marker
+info to calculate where the chapter marker goes.
+
+It lists the video 'packets', and that gets counted by `wc` to give us the frame count.
+`ffprobe -show_packets 00100.MTS 2>/dev/null | grep video | wc -l`
+
