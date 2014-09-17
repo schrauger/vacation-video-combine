@@ -14,5 +14,6 @@ Use this later in the script when creating the chapter marker
 info to calculate where the chapter marker goes.
 
 It lists the video 'packets', and that gets counted by `wc` to give us the frame count.
+
 `ffprobe -show_packets 00100.MTS 2>/dev/null | grep video | wc -l`
 
