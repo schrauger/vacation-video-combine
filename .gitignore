@@ -1,0 +1,8 @@
+thumbs.db
+.DS_Store
+.project
+.pydevproject
+.buildpath
+.settings
+.idea
+
