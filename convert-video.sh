@@ -47,7 +47,7 @@ for input_file_path in $(find "$input_folder/" -name "*.$file_ext" | sort); do
     output_file="$output_folder/""$input_file"."$file_save_ext"
     if [ -f $output_file.incomplete ]; then
         # detected partial video. delete and restart.
-        rm $output_file $output_file.incomplete;
+        rm -f $output_file $output_file.incomplete;
     fi
     if [ ! -f $output_file ]; then
         # skip completed conversions. only convert if no converted video exists.
