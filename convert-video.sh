@@ -29,18 +29,18 @@ while getopts ":e:s:" optname
 shift $((OPTIND-1))
 
 input_folder=$1
-output_folder=$2
-if [ "$output_folder" = "" ]
-then
-    output_folder=$input_folder
-fi
+#output_folder=$2
+#if [ "$output_folder" = "" ]
+#then
+#    output_folder=$input_folder
+#fi
 
 IFS=$(echo -en "\n\b")
 cmd=$(find "$input_folder" -name "*.$file_ext")
 
 for input_file_path in $(find "$input_folder/" -name "*.$file_ext" | sort); do
 
-    #input_folder=$(dirname $input_file_path)
+    output_folder=$(dirname $input_file_path)
     input_file=$(basename "$input_file_path")
 
     input_file="${input_file%.$file_ext}"
