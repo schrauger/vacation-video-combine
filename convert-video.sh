@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash -e
 
 #This converts the panasonic camcorder video files into mkv files with an x264 format.
 # If you wish to combine the videos later into one continuous file, see the ‘merge mkv’ doc for instructions.
