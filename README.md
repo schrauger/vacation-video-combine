@@ -10,3 +10,4 @@ I'd like this script to add chapter markers for each clip in the future, but tha
 
 ## Dependencies
 Requires a new version of ffmpeg, version 1.1 or later. Due to politics, ffmpeg was replaced by avconv in debian/ubuntu repositories, and avconv does not have the concat demuxer needed by this script. You should really remove avconv and reinstall ffmpeg, as it has added many features, and it also pulls in fixes from the avconv project.
+* This was restored in Ubuntu 15.04 and later
