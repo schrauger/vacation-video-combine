@@ -1,4 +1,4 @@
-ffmpeg -f concat -i mylist.txt -c copy output.mkv
+ffmpeg -f concat -i mylist.txt -c copy "Videos Combined.MTS"
 
 where mylist.txt contains the list of videos.
 
@@ -7,6 +7,11 @@ file '00099.MTS'
 file '00100.MTS'
 file '00101.MTS'
 ```
+
+find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt
+
+Full command
+find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt && ffmpeg -f concat -i mylist.txt -c copy "Videos Combined.MTS" && rm mylist.txt
 
 ## Chapter marker stuff
 This works on mp4 files to get the total number of frames.
