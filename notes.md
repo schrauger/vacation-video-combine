@@ -8,10 +8,19 @@ file '00100.MTS'
 file '00101.MTS'
 ```
 
-find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt
+After finding, sort by filename (should cause it to be in order of date),
+and replace any single quotes ("'") with escaped ("'\''") for ffmpeg to process.
+Then surround it with quotes and prepend 'file'.
+
+find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" ! -iname "*Combined*" -printf "%f ;;; %p\n" | sort | sed "s/.*;;; //g" | sed "s/'/'\\\''/g" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt
+
 
 Full command
-find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt && ffmpeg -f concat -i mylist.txt -c copy "Videos Combined.MTS" && rm mylist.txt
+
+find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" ! -iname "*Combined*" -printf "%f ;;; %p\n" | sort | sed "s/.*;;; //g" | sed "s/'/'\\\''/g" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt && ffmpeg -f concat -i mylist.txt -c copy "../Videos Combined.MTS" && rm mylist.txt
+
+If you want to do recursive, change maxdepth to something greater than 1. You may want to tweak it to remove any subfolders with "mistake" clips.
+
 
 ## Chapter marker stuff
 This works on mp4 files to get the total number of frames.
