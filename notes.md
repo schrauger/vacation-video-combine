@@ -18,7 +18,7 @@ find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" ! -iname "*Combined*" ! -ipath "
 
 Full command
 
-find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" ! -iname "*Combined*" ! -ipath "*Mistakes*" -printf "%f ;;; %p\n" | sort | sed "s/.*;;; //g" | sed "s/'/'\\\''/g" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt && ffmpeg -f concat -i mylist.txt -c copy "../Videos Combined.MTS" && rm mylist.txt
+find "`pwd`" -maxdepth 1 -type f -iname "*.MTS" ! -iname "*Combined*" ! -ipath "*Mistakes*" -printf "%f ;;; %p\n" | sort | sed "s/.*;;; //g" | sed "s/'/'\\\''/g" | sed "s/^/file '/g" | sed "s/$/'/g" > mylist.txt && ffmpeg -f concat -safe 0 -i mylist.txt -c copy "../Videos Combined.MTS" && rm mylist.txt
 
 If you want to do recursive, change maxdepth to something greater than 1.
 
