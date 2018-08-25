@@ -5,5 +5,6 @@
 
 for filename in *.MOV ; do
   creationdate=$(mediainfo "${filename}" | grep "Encoded date" | head -n 1 | cut -d ":" -f2- | xargs)
-  touch -d"${creationdate}"
+  echo "Setting system modified time for ${filename} to ${creationdate}"
+  touch -d"${creationdate}" "${filename}"
 done
