@@ -1,0 +1,12 @@
+ignore Unstitched folder
+ignore Videos Combined.MTS file. 
+ignore B-roll folder
+for Stitched videos, maybe just use them as-is? they'll be warped, but still want them in videos. otherwise, I'll have to use overcapture on each clip and focus on a certain viewpoint
+* also inside Stiched folder, use filename for datetime, not media creation. or run another script to set up the timestamp correctly for those files
+
+
+get creation date
+
+of those that lack creation date, use filename? or find the average timestamp of the files in the same folder (siblings).
+
+

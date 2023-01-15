@@ -1,0 +1,38 @@
+first, get a list of all videos recursively in the directory given, or current directory if not given
+
+
+[line[2:] for line in subprocess.check_output("find . \( -iname '*.MTS' -o -iname '*.mov' \) ", shell=True).splitlines()]
+
+# get directory from input. if not defined, choose current directory.
+userdir = "/media/stephen/Schrauger 4TB Photos and Videos/Photos and Videos/2017/2017.05.06-15 California Trip for Jessie's Birthday"
+
+# properly quote the input directory so that it doesn't escape the command or cause issues
+command = "find {} \( -iname '*.MTS' -o -iname '*.mov' \) ".format(quote(userdir))
+
+# get an array of all the results from 'find'
+[line for line in subprocess.check_output(command, shell=True).splitlines()]
+
+
+* allow flag to exclude specified directories, files, or filetypes
+  find -iname "*.mts" -not -path "*/excludedir/*"
+
+* should default to excluding a couple directories, and somehow default ot excluding 360 videos
+
+
+
+=========================
+
+next, find all videos that are not in the MTS format. convert them to the same format and container as MTS. make the system modified timestamp equal to the original video modified timestamp.
+
+ffmpeg -i mov.MOV -s 1920x1080 -pix_fmt yuv420p -r 59.94 -codec:v mpeg2video -codec:v:0 libx264 -codec:a ac3 -ar 48000 -ac 2 out.mts 
+
+=========================
+
+get the video creation date timestamp from video metadata for all videos, and make an array with the timestamp sorted
+* if the video doesn't have a meta timestamp, then use the system modified timestamp.
+
+=========================
+
+concatonate all videos into a single output video. Note: you must specify the framerate, or else the video length is incorrect (since the phone file conversion messes with ffmpeg concat and gives the error `Non-monotonous DTS in output stream). With the framerate explicitly set, the final video length is accurate.
+
+ffmpeg -f concat -safe 0 -i mylist.txt -c:v copy -r 59.94 -c:a copy "Videos Combined.MTS"
